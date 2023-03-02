@@ -1,4 +1,4 @@
-# EVEs_2021
+# EVEs_2023
   - Plot_tree.R à éxecuter dans R studio pour generer l'arbre des espèces et distrib EVE
 
   - remove_closeEve.py : pour générer le fichier le fichier bed_combin, possibilité de parametrer le nombre de pb séparant les EVE mergés avec la variable "distance". Par default 50 (input = bed file)
@@ -20,7 +20,9 @@ for i in *.fna; do hisat2-build --large-index -p 25  ${genome} ${genome}.hst; do
 #-- Align
 for cond1 in F_G F_S M_G M_S; do 
 cond2=$(echo $cond1| sed 's/_//')
-bowtie2 --threads 25 -x ${GT_path}/${genome}_GT.fna.bwt -U ${fastq_path}/${genome}_${cond1}_sRNA_f_t.fq -S ${sam_path}/${genome}_${cond2}_small.SAM --no-unal 
+bowtie2 --threads 25 -x ${GT_path}/${genome}_GT.fna.bwt -U ${fastq_path}/${genome}_${cond1}_sRNA_f_t.fq -S ${sam_path}/${genome}_${cond2}_small.SAM --no-20232023
+Private
+Privateunal 
 done 
 
 for cond1 in F_G F_S M_G M_S; do 
