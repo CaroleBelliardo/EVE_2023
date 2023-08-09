@@ -26,10 +26,12 @@ parser.add_argument('-pb', '--pre_bed', type=str, help='Eve annotation file (.be
 parser.add_argument('-lB', '--lB', type=str, help='mapping of long RNA (.bam file) \n')
 parser.add_argument('-sB', '--sB', type=str, help='mapping of small RNA (.bam file) \n' )
 parser.add_argument('-o', '--output', type=str, help=' output (.tab file) \n', default="output.table")
+parser.add_argument('-s', '--samtools', type=str, help=' samtools <STR> \n', default="samtools")
 
 args = parser.parse_args()   
 
 args.lenC=args.genome+'.len'
+global args.samtools
 
 # ###########################
 # ##       FUNCTIONS       ##
@@ -77,9 +79,10 @@ def f_LenContig (lenC,genome,pre_bed) :
 
 # create mpileup file with bam file
 def f_mpileup (bam,bed,genome) :
+	global args.samtools
 	try:## Bed annotation EVEs + Flanq
 		with open(bam): pass
-		os.system( '/opt/samtools-1.9/bin/samtools mpileup -f '+genome+' -l '+bed+' '+bam+' > '+bam+'.mpileup')
+		os.system(args.samtools +' mpileup -f '+genome+' -l '+bed+' '+bam+' > '+bam+'.mpileup')
 		os.system("cut -f 1,2,5 " +bam+'.mpileup'+' > '+bam+'.mpileup.cut' ) ##
 		print('small mpileup ok! ')
 	except IOError :
@@ -187,6 +190,7 @@ if b_bedCreate == True :
 # creation un fichier  bed avec flanq    PreBed = open(pre_bed, "r") 
 PreBed = open(args.pre_bed, "r")
 Bed = open(args.pre_bed+'.flanc', "w")
+
 for ligne in PreBed :
 	ligne=ligne.rstrip() # suppr. saut de ligne
 	l=ligne.split("\t")
