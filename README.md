@@ -31,7 +31,6 @@ In order to successfully utilize the scripts within this repository, certain ext
 
 
 The following R librairies are required:
-```
 * *dplyr*
 * *ggplot2*
 * *dplyr*
@@ -43,7 +42,7 @@ The following R librairies are required:
 * *wesanderson*
 * *ggplot2*
 * *gridExtra*
-```
+
 
 The following python librairies are required:
 ```
